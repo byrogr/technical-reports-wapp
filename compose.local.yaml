@@ -1,0 +1,24 @@
+# Stack local completo del panel: nginx sirve dist/ y hace reverse proxy de
+# /api al backend. Requiere que el backend YA esté corriendo (repo
+# `technical-reports`): docker compose -f compose.local.yaml up -d --build
+#
+# Se une a la red que crea el compose del backend (nombre por defecto del
+# proyecto Compose = nombre de esa carpeta: "technical-reports" ->
+# "technical-reports_default"). Si tu backend corre con otro nombre de
+# proyecto, ajusta `networks.backend.name` abajo o revisa `docker network ls`.
+#
+# Uso: docker compose -f compose.local.yaml up -d --build
+services:
+  web:
+    build: .
+    image: scontrol/technical-reports-wapp:local
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8081:80"
+    networks:
+      - backend
+
+networks:
+  backend:
+    name: technical-reports_default
+    external: true
