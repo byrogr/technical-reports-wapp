@@ -34,19 +34,19 @@ Usuarios: 1-2 personas de Scontrol, en escritorio. Bajo volumen, sin paginación
 
 ## 3. Stack tecnológico
 
-| Pieza | Elección | Motivo |
-|---|---|---|
-| Build | **Vite** + **React 19** + **TypeScript** (strict) | SPA estática, arranque inmediato, sin servidor Node en producción |
-| Estilos | **Tailwind CSS v4** | Tokens de diseño como variables CSS, sin hojas de estilo sueltas |
-| Componentes | **shadcn/ui** (Radix) + **lucide-react** | Los componentes se copian al repo y se ajustan; incluye `Sidebar`, `Table`, `Dialog`, `Form`, `Select`, `Sonner` |
-| Rutas | **React Router** (modo data/declarativo, v7) | Suficiente para ~10 rutas |
-| Datos | **TanStack Query** | Caché, estados de carga, invalidación tras mutaciones |
-| Cliente HTTP | **openapi-fetch** + tipos generados con **openapi-typescript** | Tipos de request/response derivados del `openapi.yaml`; si el backend cambia un DTO, el panel deja de compilar |
-| Formularios | **react-hook-form** + **zod** | Validación en cliente alineada con las reglas de `API.md` |
-| Fechas | **date-fns** | Formateo `dd/MM/yyyy HH:mm` |
-| Fuente | **Geist** y **Geist Mono** (`@fontsource-variable/*`) | Autoalojadas, sin depender de Google Fonts |
-| Tests | **Vitest** + **Testing Library** + **MSW** | MSW simula la API con los mismos tipos generados |
-| Paquetes | **npm** | Sin herramientas extra |
+| Pieza        | Elección                                                       | Motivo                                                                                                           |
+| ------------ | -------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| Build        | **Vite** + **React 19** + **TypeScript** (strict)              | SPA estática, arranque inmediato, sin servidor Node en producción                                                |
+| Estilos      | **Tailwind CSS v4**                                            | Tokens de diseño como variables CSS, sin hojas de estilo sueltas                                                 |
+| Componentes  | **shadcn/ui** (Radix) + **lucide-react**                       | Los componentes se copian al repo y se ajustan; incluye `Sidebar`, `Table`, `Dialog`, `Form`, `Select`, `Sonner` |
+| Rutas        | **React Router** (modo data/declarativo, v7)                   | Suficiente para ~10 rutas                                                                                        |
+| Datos        | **TanStack Query**                                             | Caché, estados de carga, invalidación tras mutaciones                                                            |
+| Cliente HTTP | **openapi-fetch** + tipos generados con **openapi-typescript** | Tipos de request/response derivados del `openapi.yaml`; si el backend cambia un DTO, el panel deja de compilar   |
+| Formularios  | **react-hook-form** + **zod**                                  | Validación en cliente alineada con las reglas de `API.md`                                                        |
+| Fechas       | **date-fns**                                                   | Formateo `dd/MM/yyyy HH:mm`                                                                                      |
+| Fuente       | **Geist** y **Geist Mono** (`@fontsource-variable/*`)          | Autoalojadas, sin depender de Google Fonts                                                                       |
+| Tests        | **Vitest** + **Testing Library** + **MSW**                     | MSW simula la API con los mismos tipos generados                                                                 |
+| Paquetes     | **npm**                                                        | Sin herramientas extra                                                                                           |
 
 No se usa: Redux/Zustand (el estado de servidor lo lleva TanStack Query y el de sesión un
 Context), Next.js (no hace falta SSR), axios (openapi-fetch ya cubre el caso).
@@ -85,17 +85,17 @@ src/
 
 ## 5. Pantallas y rutas
 
-| Ruta | Pantalla | Endpoints |
-|---|---|---|
-| `/login` | Login (pública) | `POST /api/auth/login` |
-| `/` | Redirige a `/reports` | — |
-| `/reports` | Listado de informes con filtros | `GET /api/technical-reports`, `GET /api/clients`, `GET /api/clients/{id}/equipment` |
-| `/reports/new` | Crear informe | `POST /api/technical-reports` + catálogos, clientes, equipos |
-| `/reports/:id` | Detalle + descarga PDF | `GET /api/technical-reports/{id}`, `GET .../{id}/document` |
-| `/reports/:id/edit` | Editar informe | `GET` + `PUT /api/technical-reports/{id}` |
-| `/clients` | Lista de clientes + detalle del seleccionado | `GET /api/clients` |
-| `/clients/:id` | Cliente seleccionado y sus equipos | `GET/PUT/DELETE /api/clients/{id}`, `GET/POST .../equipment`, `PUT/DELETE /api/equipment/{id}` |
-| `/catalogs?type=ACTION` | Catálogos por pestaña | `GET/POST /api/catalogs`, `PUT /api/catalogs/{id}` |
+| Ruta                    | Pantalla                                     | Endpoints                                                                                      |
+| ----------------------- | -------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| `/login`                | Login (pública)                              | `POST /api/auth/login`                                                                         |
+| `/`                     | Redirige a `/reports`                        | —                                                                                              |
+| `/reports`              | Listado de informes con filtros              | `GET /api/technical-reports`, `GET /api/clients`, `GET /api/clients/{id}/equipment`            |
+| `/reports/new`          | Crear informe                                | `POST /api/technical-reports` + catálogos, clientes, equipos                                   |
+| `/reports/:id`          | Detalle + descarga PDF                       | `GET /api/technical-reports/{id}`, `GET .../{id}/document`                                     |
+| `/reports/:id/edit`     | Editar informe                               | `GET` + `PUT /api/technical-reports/{id}`                                                      |
+| `/clients`              | Lista de clientes + detalle del seleccionado | `GET /api/clients`                                                                             |
+| `/clients/:id`          | Cliente seleccionado y sus equipos           | `GET/PUT/DELETE /api/clients/{id}`, `GET/POST .../equipment`, `PUT/DELETE /api/equipment/{id}` |
+| `/catalogs?type=ACTION` | Catálogos por pestaña                        | `GET/POST /api/catalogs`, `PUT /api/catalogs/{id}`                                             |
 
 Menú lateral: **Operación** → Informes, Clientes y equipos · **Configuración** → Catálogos.
 Al pie, el email del usuario (claim `sub` del JWT) y el botón de cerrar sesión.
@@ -103,6 +103,7 @@ Al pie, el email del usuario (claim `sub` del JWT) y el botón de cerrar sesión
 ### Detalle por pantalla
 
 **Listado de informes**
+
 - Columnas: N° (mono, enlace al detalle), Cliente, Equipo (modelo + N/S), Acción,
   Estado final (badge), Término (fecha y hora), botón de descargar PDF.
 - Filtros: Cliente, Equipo (deshabilitado hasta elegir cliente; carga los equipos de ese
@@ -111,9 +112,10 @@ Al pie, el email del usuario (claim `sub` del JWT) y el botón de cerrar sesión
 - Estado vacío con mensaje cuando no hay resultados.
 
 **Formulario de informe (crear y editar)**
-- Secciones: *Equipo* (cliente, equipo, componente afectado), *Intervención* (evento/falla,
-  acción, detalle), *Periodo* (inicio, término), *Estado del equipo* (inicial, final),
-  *Firmas* (personal técnico, responsable).
+
+- Secciones: _Equipo_ (cliente, equipo, componente afectado), _Intervención_ (evento/falla,
+  acción, detalle), _Periodo_ (inicio, término), _Estado del equipo_ (inicial, final),
+  _Firmas_ (personal técnico, responsable).
 - El cliente no se envía: solo filtra la lista de equipos. Al editar, se preselecciona a
   partir de `clientId` del informe.
 - Selects de catálogo: solo opciones **activas**; al editar se agrega además la opción
@@ -124,12 +126,14 @@ Al pie, el email del usuario (claim `sub` del JWT) y el botón de cerrar sesión
   toast "Informe 008-0042 creado".
 
 **Detalle de informe**
+
 - Cabecera: número, badge de estado final, cliente · equipo · acción; botones Editar y
   Descargar PDF.
 - Tarjetas: Equipo, Intervención (con estado inicial → final), Detalle (respeta saltos de
   línea), y en columna lateral Firmas y Registro (creado por, fecha).
 
 **Clientes y equipos** (vista maestro-detalle)
+
 - Columna izquierda: buscador (filtro en cliente, por nombre o documento) y lista de clientes.
 - Derecha: datos del cliente (documento, email), Editar, Eliminar; tabla de equipos con
   "Ver informes" (enlaza a `/reports?clientId=..&equipmentId=..`), editar y eliminar.
@@ -139,6 +143,7 @@ Al pie, el email del usuario (claim `sub` del JWT) y el botón de cerrar sesión
   con el `detail` de la API.
 
 **Catálogos**
+
 - Pestañas por tipo: Acción (`ACTION`), Estado (`STATUS`), Evento / falla (`EVENT_FAILURE`),
   Personal (`PERSONNEL`), Responsable (`SUPERVISOR`), con contador.
 - Fila: valor, pill Activa/Inactiva, switch para activar/desactivar, editar valor inline.
@@ -148,24 +153,32 @@ Al pie, el email del usuario (claim `sub` del JWT) y el botón de cerrar sesión
 ## 6. Diseño visual
 
 Referencia: mockup en Claude (lienzo "Technical Reports Panel", 6 pantallas + componente
-Sidebar). Estilo minimalista inspirado en paneles tipo Infobip: aside claro, mucho
-blanco, un solo color de acento, bordes finos en vez de sombras.
+Sidebar). Estilo minimalista inspirado en paneles tipo Infobip: aside y fondo del panel
+en un gris claro (no blanco puro), tarjetas blancas "elevadas" con sombra suave sobre
+ese fondo, un solo color de acento. El login (fuera del panel autenticado) sigue en
+`--muted`, sin el fondo del panel.
 
 ### Tokens (variables CSS en `src/index.css`, mapeadas al tema de shadcn)
 
-| Token | Valor | Uso |
-|---|---|---|
-| `--background` | `#FFFFFF` | Fondo del contenido |
-| `--foreground` | `#17181C` | Texto principal |
-| `--muted-foreground` | `#5E6370` | Texto secundario, labels, cabeceras de tabla |
-| `--border` | `#E7E6E1` | Bordes de tarjetas y tablas |
-| `--input` | `#DAD9D4` | Borde de inputs y botones secundarios |
-| `--muted` | `#FAFAF8` | Cabecera de tabla, fondo del formulario |
-| `--sidebar` | `#F5F5F2` | Fondo del aside |
-| `--primary` | `#C2410C` | Botón primario, ítem activo, enlaces (contraste 5.2:1 con blanco) |
-| `--primary-hover` | `#9A3412` | Hover de primario y enlaces |
-| `--accent` | `#FDF1EA` | Fondo del ítem seleccionado en listas |
-| `--destructive` | `#A3221A` | Eliminar, errores |
+| Token                  | Valor     | Uso                                                                            |
+| ---------------------- | --------- | ------------------------------------------------------------------------------ |
+| `--background`         | `#F5F5F2` | Fondo del panel (aside + contenido); las tarjetas van en `--card`              |
+| `--card` / `--popover` | `#FFFFFF` | Fondo de tarjetas, tablas y diálogos, elevados con sombra sobre `--background` |
+| `--foreground`         | `#17181C` | Texto principal                                                                |
+| `--muted-foreground`   | `#5E6370` | Texto secundario, labels, cabeceras de tabla                                   |
+| `--border`             | `#E7E6E1` | Separadores finos dentro de una tarjeta (filas de tabla, etc.)                 |
+| `--input`              | `#DAD9D4` | Borde de inputs y botones secundarios                                          |
+| `--muted`              | `#FAFAF8` | Cabecera de tabla, fondo del login                                             |
+| `--sidebar`            | `#F5F5F2` | Fondo del aside (igual que `--background`, separado por un borde fino)         |
+| `--primary`            | `#C2410C` | Botón primario, ítem activo, enlaces (contraste 5.2:1 con blanco)              |
+| `--primary-hover`      | `#9A3412` | Hover de primario y enlaces                                                    |
+| `--accent`             | `#FDF1EA` | Fondo del ítem seleccionado en listas                                          |
+| `--destructive`        | `#A3221A` | Eliminar, errores                                                              |
+
+**Tarjetas y contenedores tipo tarjeta** (el componente `Card`, y los contenedores de
+listas/tablas hechos a mano en `features/`): `rounded-xl bg-card shadow-sm ring-1
+ring-black/5`. No usar `border border-border` como contorno exterior de una tarjeta;
+`--border` queda para separadores finos _dentro_ de una tarjeta.
 
 **Badges de estado** (texto / fondo / punto): Operativo `#0B6B53 / #E7F4EE / #12966F`,
 Inoperativo `#A3221A / #FCEBEA / #D63B2F`, En Obs. `#8A4E08 / #FDF3E3 / #D98A1C`. Cualquier
@@ -177,10 +190,15 @@ texto del valor (normalizado), con gris por defecto.
 - Tipografía: Geist 14px base; títulos de página 26px/600 con `letter-spacing: -0.02em`;
   labels 13px/500; cabeceras de tabla 12.5px/500 en `--muted-foreground`. Números de
   informe en Geist Mono.
-- Radios: 8px en controles, 12px en tarjetas y tablas, `999px` en badges.
+- Radios: `--radius: 0` — bordes cuadrados en controles, tarjetas y tablas. Los switches y
+  el punto de los badges de estado siguen circulares (`rounded-full`, no depende de
+  `--radius`).
 - Alturas: inputs y botones 40px (38px en la barra de filtros), filas de tabla 56px.
 - Aside: 248px expandido, 64px colapsado (solo íconos con tooltip); estado recordado en
-  `localStorage`. Ítem activo: fondo blanco, borde `--border`, texto `--primary`.
+  `localStorage`. Ítem activo: fondo blanco, borde `--border`, texto `--primary`. Como
+  el aside y el contenido comparten `--background`, el aside se separa con un borde más
+  marcado (`--sidebar-border`, más oscuro que `--border`) y una sombra suave hacia su
+  lado derecho.
 - Contenido: padding `36px 40px`. Cabecera de página = título + descripción a la izquierda,
   acción principal a la derecha.
 - Accesibilidad: botones reales (`<button>`, `<a>`), `aria-label` en botones de solo ícono,
@@ -211,13 +229,13 @@ texto del valor (normalizado), con gris por defecto.
 
 ### Errores (ProblemDetail, RFC 9457)
 
-| Caso | Tratamiento en UI |
-|---|---|
-| `400` con `errors[]` | Cada `{field, message}` se asigna al campo del formulario con `setError`. Los que no correspondan a un campo, en un aviso sobre el formulario |
-| `400` sin `errors[]`, `409` | Toast o aviso con el `detail` de la respuesta |
-| `404` | Página "No encontrado" con enlace de vuelta al listado |
-| `401` | Logout y redirección a `/login` (en el login: "Correo o contraseña incorrectos") |
-| Red / `5xx` | Toast genérico "No se pudo conectar con el servidor" |
+| Caso                        | Tratamiento en UI                                                                                                                             |
+| --------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| `400` con `errors[]`        | Cada `{field, message}` se asigna al campo del formulario con `setError`. Los que no correspondan a un campo, en un aviso sobre el formulario |
+| `400` sin `errors[]`, `409` | Toast o aviso con el `detail` de la respuesta                                                                                                 |
+| `404`                       | Página "No encontrado" con enlace de vuelta al listado                                                                                        |
+| `401`                       | Logout y redirección a `/login` (en el login: "Correo o contraseña incorrectos")                                                              |
+| Red / `5xx`                 | Toast genérico "No se pudo conectar con el servidor"                                                                                          |
 
 Enviar `Accept-Language: es` para que los mensajes de validación lleguen en español.
 
@@ -268,24 +286,18 @@ dispara la descarga con el nombre de `Content-Disposition` (o `informe-<número>
 ## 10. Fases de desarrollo
 
 **Fase 1 — Base**
+
 1. Scaffold: Vite + React + TS, Tailwind, shadcn/ui (init + componentes base), Geist,
    tokens de la sección 6, ESLint + Prettier, Vitest.
 2. `openapi.yaml` + `npm run api:types` + `client.ts` con middleware de token y 401.
 3. Login, `AuthProvider`, `RequireAuth`, logout.
 4. `AppShell` con aside colapsable, rutas vacías de las 3 secciones y página 404.
 
-**Fase 2 — Maestros**
-5. Catálogos (pestañas, alta, edición, activar/desactivar).
-6. Clientes y equipos (maestro-detalle, diálogos, confirmación de borrado, errores 409).
+**Fase 2 — Maestros** 5. Catálogos (pestañas, alta, edición, activar/desactivar). 6. Clientes y equipos (maestro-detalle, diálogos, confirmación de borrado, errores 409).
 
-**Fase 3 — Informes**
-7. Listado con filtros en la query string.
-8. Detalle + descarga del PDF.
-9. Formulario de creación y edición.
+**Fase 3 — Informes** 7. Listado con filtros en la query string. 8. Detalle + descarga del PDF. 9. Formulario de creación y edición.
 
-**Fase 4 — Entrega**
-10. Dockerfile (build + nginx) y su integración en el compose local.
-11. Despliegue en Azure Static Web Apps (+ CORS en el backend).
+**Fase 4 — Entrega** 10. Dockerfile (build + nginx) y su integración en el compose local. 11. Despliegue en Azure Static Web Apps (+ CORS en el backend).
 
 ## 11. Notas para el desarrollo con Claude Code CLI
 

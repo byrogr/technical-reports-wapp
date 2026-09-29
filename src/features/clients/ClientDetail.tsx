@@ -117,7 +117,7 @@ export function ClientDetail({ client }: { client: Client }) {
             description="Agrega el primer equipo de este cliente."
           />
         ) : (
-          <div className="rounded-xl border border-border">
+          <div className="rounded-xl bg-card shadow-sm ring-1 ring-black/5">
             <Table>
               <TableHeader>
                 <TableRow>

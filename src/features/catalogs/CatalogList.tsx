@@ -69,7 +69,7 @@ export function CatalogList({ type }: { type: CatalogType }) {
         </Button>
       </form>
 
-      <div className="rounded-xl border border-border bg-card">
+      <div className="rounded-xl bg-card shadow-sm ring-1 ring-black/5">
         {isPending ? (
           <div className="flex flex-col gap-3 p-4">
             <Skeleton className="h-10 w-full" />
