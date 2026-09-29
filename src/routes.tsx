@@ -27,7 +27,7 @@ export const router = createBrowserRouter([
         children: [
           { path: '/', element: <Navigate to="/reports" replace /> },
           { path: '/reports', element: <ReportListPage /> },
-          { path: '/clients', element: <ClientListPage /> },
+          { path: '/clients/:id?', element: <ClientListPage /> },
           { path: '/catalogs', element: <CatalogsPage /> },
           { path: '*', element: <NotFoundPage /> },
         ],

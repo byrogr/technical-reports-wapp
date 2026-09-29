@@ -1,0 +1,25 @@
+/**
+ * Mensaje de estado vacío para listas y tablas sin resultados.
+ *
+ * @author Roger Rojas Effio - roger.rojas@rmsolutions.pe
+ */
+import type { LucideIcon } from 'lucide-react'
+import type { ReactNode } from 'react'
+
+interface EmptyStateProps {
+  icon?: LucideIcon
+  title: string
+  description?: string
+  action?: ReactNode
+}
+
+export function EmptyState({ icon: Icon, title, description, action }: EmptyStateProps) {
+  return (
+    <div className="flex flex-col items-center justify-center gap-2 py-12 text-center">
+      {Icon && <Icon className="size-8 text-muted-foreground" aria-hidden="true" />}
+      <p className="text-sm font-medium text-foreground">{title}</p>
+      {description && <p className="max-w-sm text-sm text-muted-foreground">{description}</p>}
+      {action && <div className="mt-2">{action}</div>}
+    </div>
+  )
+}

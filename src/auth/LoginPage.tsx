@@ -9,6 +9,7 @@ import { useForm } from 'react-hook-form'
 import { Navigate, useLocation, useNavigate } from 'react-router-dom'
 import { z } from 'zod'
 
+import { FieldError } from '@/components/FieldError'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
@@ -71,7 +72,7 @@ export function LoginPage() {
                 aria-invalid={errors.email ? true : undefined}
                 {...register('email')}
               />
-              {errors.email && <p className="text-sm text-destructive">{errors.email.message}</p>}
+              <FieldError message={errors.email?.message} />
             </div>
 
             <div className="flex flex-col gap-1.5">
@@ -83,16 +84,10 @@ export function LoginPage() {
                 aria-invalid={errors.password ? true : undefined}
                 {...register('password')}
               />
-              {errors.password && (
-                <p className="text-sm text-destructive">{errors.password.message}</p>
-              )}
+              <FieldError message={errors.password?.message} />
             </div>
 
-            {formError && (
-              <p role="alert" className="text-sm text-destructive">
-                {formError}
-              </p>
-            )}
+            <FieldError message={formError ?? undefined} />
 
             <Button type="submit" disabled={isSubmitting} className="mt-2">
               {isSubmitting ? 'Ingresando…' : 'Ingresar'}

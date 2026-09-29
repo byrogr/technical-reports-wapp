@@ -26,3 +26,14 @@ export function isProblemDetail(value: unknown): value is ProblemDetail {
 export function getProblemMessage(problem: ProblemDetail | undefined): string {
   return problem?.detail ?? 'No se pudo conectar con el servidor'
 }
+
+/** Error lanzado por los hooks de mutación cuando la API responde con un ProblemDetail. */
+export class ApiProblemError extends Error {
+  problem: ProblemDetail
+
+  constructor(problem: ProblemDetail) {
+    super(getProblemMessage(problem))
+    this.name = 'ApiProblemError'
+    this.problem = problem
+  }
+}
