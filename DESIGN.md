@@ -155,8 +155,10 @@ Al pie, el email del usuario (claim `sub` del JWT) y el botón de cerrar sesión
 Referencia: mockup en Claude (lienzo "Technical Reports Panel", 6 pantallas + componente
 Sidebar). Estilo minimalista inspirado en paneles tipo Infobip: aside y fondo del panel
 en un gris claro (no blanco puro), tarjetas blancas "elevadas" con sombra suave sobre
-ese fondo, un solo color de acento. El login (fuera del panel autenticado) sigue en
-`--muted`, sin el fondo del panel.
+ese fondo, un solo color de acento. El login (fuera del panel autenticado) va en dos
+columnas: a la izquierda una foto propia de la empresa (`src/assets/login-hero.jpg`,
+oculta por debajo de `lg`) y a la derecha, sobre `--muted`, el logo oficial
+(`src/assets/logo-scontrol.png`) y el formulario en una tarjeta.
 
 ### Tokens (variables CSS en `src/index.css`, mapeadas al tema de shadcn)
 
