@@ -115,4 +115,9 @@
   html {
     @apply font-sans;
   }
+  /* Tailwind v4 dejó los botones con cursor por defecto; se restaura la manito. */
+  button:not(:disabled),
+  [role='button']:not(:disabled) {
+    cursor: pointer;
+  }
 }

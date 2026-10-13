@@ -1,12 +1,14 @@
 /**
  * Menú lateral: Operación (Informes, Clientes y equipos) y Configuración (Catálogos).
- * Al pie, el email del usuario y el botón de cerrar sesión.
+ * Arriba, el logo (como ícono) y las siglas del sistema (SIT); al pie, el email del usuario
+ * y el botón de cerrar sesión.
  *
  * @author Roger Rojas Effio - roger.rojas@rmsolutions.pe
  */
 import { FileText, LogOut, Tags, Users } from 'lucide-react'
 import { NavLink, useLocation } from 'react-router-dom'
 
+import logo from '@/assets/logo-scontrol-mark.png'
 import { useAuth } from '@/auth/useAuth'
 import {
   Sidebar,
@@ -36,10 +38,18 @@ export function AppSidebar() {
   return (
     <Sidebar collapsible="icon">
       <SidebarHeader>
-        <div className="flex items-center justify-between px-2 py-1">
-          <span className="truncate text-sm font-semibold text-sidebar-foreground group-data-[collapsible=icon]:hidden">
-            Informes Técnicos
-          </span>
+        <div className="flex items-center gap-2 px-1 py-1 group-data-[collapsible=icon]:flex-col group-data-[collapsible=icon]:px-0">
+          <div className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-card p-1 shadow-sm ring-1 ring-black/5 group-data-[collapsible=icon]:size-8">
+            <img
+              src={logo}
+              alt="Scontrol Ingeniería"
+              className="max-h-full max-w-full object-contain"
+            />
+          </div>
+          <div className="min-w-0 flex-1 leading-tight group-data-[collapsible=icon]:hidden">
+            <p className="text-sm font-semibold text-sidebar-foreground">SIT</p>
+            <p className="truncate text-xs text-muted-foreground">Sistema de Informes Técnicos</p>
+          </div>
           <SidebarTrigger />
         </div>
       </SidebarHeader>
